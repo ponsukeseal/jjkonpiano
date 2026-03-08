@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Playlist</title>
+
+<style>
+body{
+  margin:0;
+  background:#121212;
+  color:white;
+  font-family:Arial, sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+h1{
+  margin-top:30px;
+}
+
+#playlist{
+  width:300px;
+  margin-top:20px;
+}
+
+.song{
+  padding:10px;
+  border-bottom:1px solid #333;
+  cursor:pointer;
+}
+
+.song:hover{
+  background:#1db954;
+}
+
+.active{
+  background:#1db954;
+}
+
+audio{
+  margin-top:30px;
+  width:350px;
+  filter:invert(1);
+}
+
+.controls{
+  margin-top:10px;
+}
+
+button{
+  background:#1db954;
+  border:none;
+  color:white;
+  padding:10px 15px;
+  margin:5px;
+  cursor:pointer;
+  border-radius:5px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>My Music</h1>
+
+<div id="playlist"></div>
+
+<audio id="player" controls></audio>
+
+<div class="controls">
+<button onclick="prevSong()">Previous</button>
+<button onclick="nextSong()">Next</button>
+</div>
+
+<script>
+
+const songs = [
+"morethanwords.mp3",
+"specialz.mp3",
+"lostinparadise.mp3",
+"kaikaikitan.mp3",
+"aonosumika.mp3",
+"akari.mp3",
+"aizo.mp3"
+];
+
+let current = 0;
+const player = document.getElementById("player");
+const playlist = document.getElementById("playlist");
+
+function loadSongs(){
+songs.forEach((song,i)=>{
+  const div = document.createElement("div");
+  div.className="song";
+  div.innerText=song.replace(".mp3","");
+  div.onclick=()=>playSong(i);
+  playlist.appendChild(div);
+});
+}
+
+function playSong(index){
+current=index;
+player.src=songs[current];
+player.play();
+updateActive();
+}
+
+function nextSong(){
+current=(current+1)%songs.length;
+playSong(current);
+}
+
+function prevSong(){
+current=(current-1+songs.length)%songs.length;
+playSong(current);
+}
+
+function updateActive(){
+document.querySelectorAll(".song").forEach((el,i)=>{
+el.classList.toggle("active",i===current);
+});
+}
+
+player.addEventListener("ended",nextSong);
+
+loadSongs();
+playSong(0);
+
+</script>
+
+</body>
+</html>
