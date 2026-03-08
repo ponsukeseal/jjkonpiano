@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Jujutsu Kaisen-TensaiSachi</title>
+<title>Jujutsu Kaisen Piano Playlist</title>
 
 <style>
+
 body{
   margin:0;
   background:#121212;
   color:white;
   font-family:Arial, sans-serif;
   display:flex;
-  flex-direction:column;
+  justify-content:center;
   align-items:center;
+  height:100vh;
+}
+
+.container{
+  background:#181818;
+  padding:30px;
+  border-radius:12px;
+  width:420px;
+  box-shadow:0 0 25px rgba(0,0,0,0.7);
+  text-align:center;
 }
 
 h1{
-  margin-top:30px;
+  margin-top:0;
+  font-size:28px;
 }
 
 #playlist{
-  width:300px;
   margin-top:20px;
+  max-height:250px;
+  overflow-y:auto;
+  border-radius:8px;
 }
 
 .song{
-  padding:10px;
+  padding:12px;
   border-bottom:1px solid #333;
   cursor:pointer;
+  transition:0.2s;
 }
 
 .song:hover{
@@ -38,8 +53,8 @@ h1{
 }
 
 audio{
-  margin-top:30px;
-  width:350px;
+  margin-top:20px;
+  width:100%;
   filter:invert(1);
 }
 
@@ -51,25 +66,36 @@ button{
   background:#1db954;
   border:none;
   color:white;
-  padding:10px 15px;
+  padding:10px 18px;
   margin:5px;
   cursor:pointer;
-  border-radius:5px;
+  border-radius:6px;
+  font-weight:bold;
+  transition:0.2s;
 }
+
+button:hover{
+  transform:scale(1.05);
+}
+
 </style>
 
 </head>
 <body>
 
-<h1>S1-3op&endJJK</h1>
+<div class="container">
+
+<h1>🎵 JJK Piano Playlist</h1>
 
 <div id="playlist"></div>
 
 <audio id="player" controls></audio>
 
 <div class="controls">
-<button onclick="prevSong()">Previous</button>
-<button onclick="nextSong()">Next</button>
+<button onclick="prevSong()">⏮ Prev</button>
+<button onclick="nextSong()">Next ⏭</button>
+</div>
+
 </div>
 
 <script>
