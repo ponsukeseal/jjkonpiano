@@ -1,51 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>JJK-Piano-TensaiSachi</title>
+<title>Jujutsu Kaisen-TensaiSachi</title>
 
 <style>
 
 body{
   margin:0;
-  background:#121212;
-  color:white;
   font-family:Arial, sans-serif;
+  color:white;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
-  height:100vh;
+  overflow:hidden;
+
+  background:linear-gradient(270deg,#0f0f0f,#1a1a1a,#0f0f0f);
+  background-size:600% 600%;
+  animation:bgmove 20s infinite;
 }
 
-.container{
-  background:#181818;
-  padding:30px;
-  border-radius:12px;
-  width:420px;
-  box-shadow:0 0 25px rgba(0,0,0,0.7);
-  text-align:center;
+@keyframes bgmove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
 h1{
-  margin-top:0;
-  font-size:28px;
+  margin-top:40px;
+  font-size:36px;
+
+  text-shadow:
+  0 0 10px #1db954,
+  0 0 20px #1db954,
+  0 0 40px #1db954;
 }
 
 #playlist{
-  margin-top:20px;
-  max-height:250px;
-  overflow-y:auto;
-  border-radius:8px;
+  width:320px;
+  margin-top:25px;
+  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,0.4);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,0,0,0.7);
 }
 
 .song{
-  padding:12px;
+  padding:14px;
   border-bottom:1px solid #333;
   cursor:pointer;
-  transition:0.2s;
+  transition:0.25s;
 }
 
 .song:hover{
   background:#1db954;
+  padding-left:20px;
+  box-shadow:0 0 10px #1db954;
 }
 
 .active{
@@ -53,29 +63,53 @@ h1{
 }
 
 audio{
-  margin-top:20px;
-  width:100%;
+  margin-top:30px;
+  width:360px;
   filter:invert(1);
 }
 
 .controls{
-  margin-top:10px;
+  margin-top:12px;
 }
 
 button{
   background:#1db954;
   border:none;
   color:white;
-  padding:10px 18px;
-  margin:5px;
+  padding:11px 18px;
+  margin:6px;
   cursor:pointer;
   border-radius:6px;
   font-weight:bold;
-  transition:0.2s;
+  transition:0.25s;
 }
 
 button:hover{
-  transform:scale(1.05);
+  transform:scale(1.1);
+  box-shadow:
+  0 0 10px #1db954,
+  0 0 20px #1db954;
+}
+
+/* floating particles */
+
+.particle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:#1db954;
+  border-radius:50%;
+  opacity:0.6;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh);
+  }
+  to{
+    transform:translateY(-10vh);
+  }
 }
 
 </style>
@@ -83,19 +117,15 @@ button:hover{
 </head>
 <body>
 
-<div class="container">
-
-<h1>🎵 JJK Piano Playlist</h1>
+<h1>S1-3op&endJJK</h1>
 
 <div id="playlist"></div>
 
 <audio id="player" controls></audio>
 
 <div class="controls">
-<button onclick="prevSong()">⏮ Prev</button>
-<button onclick="nextSong()">Next ⏭</button>
-</div>
-
+<button onclick="prevSong()">Previous</button>
+<button onclick="nextSong()">Next</button>
 </div>
 
 <script>
@@ -117,7 +147,7 @@ const playlist = document.getElementById("playlist");
 
 function loadSongs(){
 songs.forEach((song,i)=>{
-  const div = document.createElement("div");
+  const div=document.createElement("div");
   div.className="song";
   div.innerText=song.replace(".mp3","");
   div.onclick=()=>playSong(i);
@@ -152,6 +182,16 @@ player.addEventListener("ended",nextSong);
 
 loadSongs();
 playSong(0);
+
+/* generate particles */
+
+for(let i=0;i<40;i++){
+  const p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(6+Math.random()*10)+"s";
+  document.body.appendChild(p);
+}
 
 </script>
 
