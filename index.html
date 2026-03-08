@@ -3,7 +3,6 @@
 <head>
 
 <title>Jujutsu Kaisen-TensaiSachi</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -46,7 +45,6 @@ h1{
   background:rgba(0,0,0,0.4);
   border-radius:12px;
   overflow:hidden;
-  box-shadow:0 0 20px rgba(0,0,0,0.7);
 }
 
 .song{
@@ -60,7 +58,6 @@ h1{
 .song:hover{
   background:#1db954;
   padding-left:22px;
-  box-shadow:0 0 10px #1db954;
 }
 
 .active{
@@ -88,7 +85,6 @@ button{
   border-radius:6px;
   font-weight:bold;
   transition:0.25s;
-  font-size:clamp(14px,4vw,16px);
 }
 
 button:hover{
@@ -97,8 +93,6 @@ button:hover{
   0 0 10px #1db954,
   0 0 20px #1db954;
 }
-
-/* floating particles */
 
 .particle{
   position:absolute;
@@ -111,12 +105,8 @@ button:hover{
 }
 
 @keyframes float{
-  from{
-    transform:translateY(100vh);
-  }
-  to{
-    transform:translateY(-10vh);
-  }
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
 }
 
 </style>
@@ -124,7 +114,7 @@ button:hover{
 </head>
 <body>
 
-<h1>S1-3op&endJJK</h1>
+<h1>S1–3 OP & END JJK</h1>
 
 <div id="playlist"></div>
 
@@ -138,14 +128,16 @@ button:hover{
 <script>
 
 const songs = [
-"lostinparadise.mp3",
-"kaikaikitan.mp3",
-"morethanwords.mp3",
-"specialz.mp3",
-"aonosumika.mp3",
-"akari.mp3",
-"aizo.mp3",
-"yoakenouta.mp3"
+
+{file:"lostinparadise.mp3", title:"Lost in Paradise"},
+{file:"kaikaikitan.mp3", title:"Kaikai Kitan"},
+{file:"morethanwords.mp3", title:"More Than Words"},
+{file:"specialz.mp3", title:"SPECIALZ"},
+{file:"aonosumika.mp3", title:"Ao no Sumika"},
+{file:"akari.mp3", title:"Akari"},
+{file:"aizo.mp3", title:"Aizo"},
+{file:"yoakenouta.mp3", title:"Yoake no Uta"}
+
 ];
 
 let current = 0;
@@ -156,7 +148,7 @@ function loadSongs(){
 songs.forEach((song,i)=>{
   const div=document.createElement("div");
   div.className="song";
-  div.innerText=song.replace(".mp3","");
+  div.innerText=song.title;
   div.onclick=()=>playSong(i);
   playlist.appendChild(div);
 });
@@ -164,7 +156,7 @@ songs.forEach((song,i)=>{
 
 function playSong(index){
 current=index;
-player.src=songs[current];
+player.src=songs[current].file;
 player.play();
 updateActive();
 }
@@ -190,7 +182,7 @@ player.addEventListener("ended",nextSong);
 loadSongs();
 playSong(0);
 
-/* generate particles */
+/* floating particles */
 
 for(let i=0;i<40;i++){
   const p=document.createElement("div");
